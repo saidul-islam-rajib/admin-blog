@@ -54,13 +54,13 @@ export class DashboardComponent implements OnInit {
 
   public users: IUser[] = [
     {
-      name: 'Yiorgos Avraamu',
+      name: 'Saidul Islam Rajib',
       state: 'New',
-      registered: 'Jan 1, 2021',
-      country: 'Us',
+      registered: 'Jan 31, 2025',
+      country: 'BD',
       usage: 50,
       period: 'Jun 11, 2021 - Jul 10, 2021',
-      payment: 'Mastercard',
+      payment: 'Brac Bank',
       activity: '10 sec ago',
       avatar: './assets/images/avatars/profile.png',
       status: 'success',
