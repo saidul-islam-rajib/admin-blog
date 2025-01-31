@@ -9,7 +9,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'education',
+        redirectTo: 'list',
         pathMatch: 'full'
       },
       {
@@ -25,7 +25,14 @@ export const routes: Routes = [
         data: {
           title: 'Add'
         }
-      }
+      },
+      {
+        path: 'edit/:id',
+        loadComponent: () => import('./educations/edit-education/edit-education.component').then(m => m.EditEducationComponent),
+        data: {
+          title: 'Edit'
+        }
+      },
     ]
   },
 ];
