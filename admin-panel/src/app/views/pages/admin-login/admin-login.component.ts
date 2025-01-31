@@ -70,7 +70,8 @@ export class AdminLoginComponent {
         next: () => {
           this.isLoading = false;
 
-          this.router.navigate(['/home']);
+          this.isLoginMode = true;
+          this.router.navigate(['/login']);
         },
         error: (error) => {
           this.isLoading = false;
