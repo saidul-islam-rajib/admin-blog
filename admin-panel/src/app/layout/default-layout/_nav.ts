@@ -30,6 +30,28 @@ export const navItems: INavData[] = [
     title: true
   },
   {
+    name: 'Education List',
+    url: '/education',
+    iconComponent: { name: 'cil-puzzle' },
+    children: [
+      {
+        name: 'List',
+        url: '/education/list',
+        icon: 'nav-icon-bullet'
+      },
+      {
+        name: 'Add',
+        url: '/education/add',
+        icon: 'nav-icon-bullet'
+      },
+      {
+        name: 'Edit',
+        url: '/education/edit/:id',
+        icon: 'nav-icon-bullet'
+      }
+    ]
+  },
+  {
     name: 'Base',
     url: '/base',
     iconComponent: { name: 'cil-puzzle' },
