@@ -18,6 +18,13 @@ export const routes: Routes = [
         data: {
           title: 'List'
         }
+      },
+      {
+        path: 'add',
+        loadComponent: () => import('./educations/add-education/add-education.component').then(m => m.AddEducationComponent),
+        data: {
+          title: 'Add'
+        }
       }
     ]
   },
