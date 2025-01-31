@@ -44,9 +44,10 @@ export class AdminLoginComponent {
       const loginData = this.loginForm.value;
 
       this.http.post(environment.loginUrl, loginData).subscribe({
-        next: () => {
+        next: (response) => {
           this.isLoading = false;
 
+          console.log("Login response:", response)
           this.router.navigate(['/dashboard']);
         },
         error: (err) => {
