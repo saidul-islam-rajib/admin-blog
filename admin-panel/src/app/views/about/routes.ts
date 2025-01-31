@@ -10,29 +10,38 @@ export const routes: Routes = [
       {
         path: '',
         redirectTo: 'list',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'list',
-        loadComponent: () => import('./educations/educations.component').then(m => m.EducationsComponent),
+        loadComponent: () =>
+          import('./educations/educations.component').then(
+            (m) => m.EducationsComponent
+          ),
         data: {
-          title: 'List'
-        }
+          title: 'List',
+        },
       },
       {
         path: 'add',
-        loadComponent: () => import('./educations/add-education/add-education.component').then(m => m.AddEducationComponent),
+        loadComponent: () =>
+          import('./educations/add-education/add-education.component').then(
+            (m) => m.AddEducationComponent
+          ),
         data: {
-          title: 'Add'
-        }
+          title: 'Add',
+        },
       },
       {
         path: 'edit/:id',
-        loadComponent: () => import('./educations/edit-education/edit-education.component').then(m => m.EditEducationComponent),
+        loadComponent: () =>
+          import('./educations/edit-education/edit-education.component').then(
+            (m) => m.EditEducationComponent
+          ),
         data: {
-          title: 'Edit'
-        }
+          title: 'Edit',
+        },
       },
-    ]
+    ],
   },
 ];
