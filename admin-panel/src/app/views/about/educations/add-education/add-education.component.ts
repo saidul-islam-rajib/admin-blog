@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import {
   FormArray,
@@ -7,20 +8,22 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-education',
-  imports: [
-    CommonModule, ReactiveFormsModule
-  ],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './add-education.component.html',
   styleUrl: './add-education.component.scss',
 })
 export class AddEducationComponent {
   educationForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient
+  ) {
     this.educationForm = this.fb.group({
       instituteName: ['', Validators.required],
       instituteLogo: [''],
@@ -28,7 +31,7 @@ export class AddEducationComponent {
       isCurrentStudent: [false],
       startDate: ['', Validators.required],
       endDate: [''],
-      educationSections: this.fb.array([]),
+      educationSection: this.fb.array([]),
     });
 
     // Disable endDate if isCurrentStudent is true
@@ -47,29 +50,44 @@ export class AddEducationComponent {
   }
 
   // Getter for educationSections FormArray
-  get educationSections(): FormArray {
-    return this.educationForm.get('educationSections') as FormArray;
+  get educationSection(): FormArray {
+    return this.educationForm.get('educationSection') as FormArray;
   }
 
   // Add a new education section
   addSection(): void {
-    this.educationSections.push(
+    this.educationSection.push(
       this.fb.group({
-        sectionDescription: [''],
+        sectionDescripton: ['', Validators.required],
       })
     );
   }
 
   // Remove an education section by index
   removeSection(index: number): void {
-    this.educationSections.removeAt(index);
+    this.educationSection.removeAt(index);
   }
 
   // Handle form submission
   onSubmit(): void {
     if (this.educationForm.valid) {
-      console.log(this.educationForm.value);
-      // Send the form data to your backend here
+      console.log('the form is valid');
+
+      const formData = this.educationForm.value;
+      console.log("form data : ", formData)
+
+      this.http.post(environment.educationPost, formData)
+        .subscribe({
+          next: (response) => {
+            console.log('Success:', response);
+            alert('Education details submitted successfully!');
+            this.educationForm.reset();
+          },
+          error: (error) => {
+            console.error('Error:', error);
+            alert('Failed to submit education details.');
+          },
+        });
     } else {
       console.error('Form is invalid');
     }

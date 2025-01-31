@@ -94,18 +94,18 @@
               <label class="form-label"
                 ><i class="cil-notes"></i> Education Sections</label
               >
-              <div formArrayName="educationSections">
+              <div formArrayName="educationSection">
                 <div
                   *ngFor="
-                    let section of educationSections.controls;
+                    let section of educationSection.controls;
                     let i = index
                   "
                   [formGroupName]="i"
                   class="border p-3 rounded mb-2"
                 >
                   <input
-                    id="sectionDescription-{{ i }}"
-                    formControlName="sectionDescription"
+                    id="sectionDescripton-{{ i }}"
+                    formControlName="sectionDescripton"
                     class="form-control mb-2"
                     placeholder="Enter Section Description"
                   />
