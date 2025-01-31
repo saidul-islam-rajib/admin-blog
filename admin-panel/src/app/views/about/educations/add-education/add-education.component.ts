@@ -71,20 +71,15 @@ export class AddEducationComponent {
   // Handle form submission
   onSubmit(): void {
     if (this.educationForm.valid) {
-      console.log('the form is valid');
-
       const formData = this.educationForm.value;
-      console.log("form data : ", formData)
 
-      this.http.post(environment.educationPost, formData)
+      this.http.post(environment.educationPost('1EC6473A-3C18-49A5-A460-986879BB9CBE'), formData)
         .subscribe({
           next: (response) => {
-            console.log('Success:', response);
             alert('Education details submitted successfully!');
             this.educationForm.reset();
           },
           error: (error) => {
-            console.error('Error:', error);
             alert('Failed to submit education details.');
           },
         });
