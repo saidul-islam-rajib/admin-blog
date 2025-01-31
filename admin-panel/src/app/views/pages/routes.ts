@@ -17,14 +17,14 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () => import('./login/login.component').then(m => m.LoginComponent),
+    loadComponent: () => import('./admin-login/admin-login.component').then(m => m.AdminLoginComponent),
     data: {
       title: 'Login Page'
     }
   },
   {
     path: 'register',
-    loadComponent: () => import('./register/register.component').then(m => m.RegisterComponent),
+    loadComponent: () => import('./admin-login/admin-login.component').then(m => m.AdminLoginComponent),
     data: {
       title: 'Register Page'
     }
