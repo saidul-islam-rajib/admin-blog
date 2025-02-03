@@ -16,6 +16,7 @@ export class StorageService {
 
   removeItem(key: string): void {
     if (isPlatformBrowser(this.platformId)) {
+      localStorage.clear();
       localStorage.removeItem(key);
     }
   }
