@@ -2,11 +2,10 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Company Name</th>
+      <th scope="col">Company_Name</th>
       <th scope="col">Designation</th>
-      <th scope="col">Is Full Time</th>
-      <th scope="col">Start Date</th>
-      <th scope="col">End Date</th>
+      <th scope="col">Full_Time</th>
+      <th scope="col">Employement</th>
       <th scope="col">Description</th>
     </tr>
   </thead>
@@ -15,11 +14,19 @@
       <th scope="row">{{ i + 1 }}</th>
       <td>{{ experience.companyName }}</td>
       <td>{{ experience.designation }}</td>
-      <td>{{ experience.isFullTimeEmployee ? 'Yes' : 'No' }}</td>
-      <td>{{ experience.startDate | date : "MMMM dd, yyyy" }}</td>
-      <td>{{ experience.isCurrentEmployee ? "Currently Working" : experience.endDate | date : "MMMM dd, yyyy" }}</td>
-      <td [innerHTML]="getSectionDescriptions(experience.experienceSection)"></td>
-
+      <td>{{ experience.isFullTimeEmployee ? "Yes" : "No" }}</td>
+      <td>
+        {{ experience.startDate | date : "MMM yyyy" }}
+        <span style="color: red">to</span>
+        {{
+          experience.isCurrentEmployee
+            ? "Currently Working"
+            : (experience.endDate | date : "MMM yyyy")
+        }}
+      </td>
+      <td
+        [innerHTML]="getSectionDescriptions(experience.experienceSection)"
+      ></td>
     </tr>
   </tbody>
 </table>
