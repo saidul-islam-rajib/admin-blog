@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AboutApiService } from '../../../services/about-api.service';
+import { AboutApiService } from '../../../core/services/about-api.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
