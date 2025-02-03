@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { environment } from '../../../../environments/environment'
 import { AuthService } from '../../../core/services/authentications/auth.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-admin-login',
@@ -24,7 +25,8 @@ export class AdminLoginComponent {
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private toast: NgToastService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -39,7 +41,6 @@ export class AdminLoginComponent {
   }
 
   onLogin() {
-    console.log("login method is called")
     if (this.loginForm.valid) {
       this.isLoading = true;
       this.errorMessage = null;
@@ -48,6 +49,8 @@ export class AdminLoginComponent {
       .subscribe({
         next: (response) => {
           this.authService.storeToken(response.token);
+          this.toast.success('success', response.message, 3000 );
+
           this.isLoading = false;
           this.router.navigate(['/dashboard']);
         },

@@ -7,11 +7,12 @@ import { delay, filter, map, tap } from 'rxjs/operators';
 import { ColorModeService } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from './icons/icon-subset';
+import { NgToastModule } from 'ng-angular-popup';
 
 @Component({
     selector: 'app-root',
-    template: '<router-outlet />',
-    imports: [RouterOutlet]
+    template: '<router-outlet /> <ng-toast></ng-toast>',
+    imports: [RouterOutlet, NgToastModule]
 })
 export class AppComponent implements OnInit {
   title = 'Rajib';

@@ -24,6 +24,7 @@ import {
 
 import { IconDirective } from '@coreui/icons-angular';
 import { AuthService } from '../../../core/services/authentications/auth.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
     selector: 'app-default-header',
@@ -47,7 +48,8 @@ export class DefaultHeaderComponent extends HeaderComponent {
   });
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private toast: NgToastService
   ) {
     super();
   }
@@ -131,6 +133,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
   logout() {
     this.authService.logout();
+    this.toast.success('success', 'Logged out', 3000);
   }
 
 }
