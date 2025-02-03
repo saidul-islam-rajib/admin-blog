@@ -30,6 +30,11 @@ export const routes: Routes = [
           import('./views/about/experiences/routes').then((m) => m.routes),
       },
       {
+        path: 'hobby',
+        loadChildren: () =>
+          import('./views/about/hobbies/routes').then((m) => m.routes),
+      },
+      {
         path: 'theme',
         loadChildren: () =>
           import('./views/theme/routes').then((m) => m.routes),
