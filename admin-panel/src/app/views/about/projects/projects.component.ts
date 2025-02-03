@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { AboutApiService } from '../../../core/services/about-api.service';
 import { Project, ProjectSection } from '../../../core/interfaces/project';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-projects',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
 })
@@ -18,6 +19,7 @@ export class ProjectsComponent {
     this.about.getProjectList().subscribe({
       next: (response) => {
         this.projectList = response;
+        console.log("list of project ", this.projectList)
       },
       error: (err) => {
         console.log('Error while loading project list', err.error.message);
@@ -29,13 +31,6 @@ export class ProjectsComponent {
     if (!section || !Array.isArray(section)) {
       return '';
     }
-    return section.map((s: any, index: number) => `${index + 1}. ${s.topicName}`)
-  }
-
-  getProjectTagSection(tag: any) {
-    if (!tag || !Array.isArray(tag)) {
-      return '';
-    }
-    return tag.map((k: any) => `${k.projectTagName}`);
+    return section.map((s: any, index: number) => `${index + 1}. ${s.topicName}`).join('<br/><br/>')
   }
 }
