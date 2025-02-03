@@ -34,5 +34,6 @@ export const appConfig: ApplicationConfig = {
     IconSetService,
     provideAnimations(),
     provideHttpClient(),
+    StorageService
   ],
 };

@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   login(user: any) {
-    return this.http.post<any>(`${this.baseUrl}/login`, user);
+    return this.http.post<any>(`${this.baseUrl}/authentication/login`, user);
   }
 
   logout() {
