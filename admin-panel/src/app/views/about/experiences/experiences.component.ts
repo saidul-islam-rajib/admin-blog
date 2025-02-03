@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AboutApiService } from '../../../core/services/about-api.service';
 import { CommonModule } from '@angular/common';
+import { Experience } from '../../../core/interfaces/experience';
 
 @Component({
   selector: 'app-experiences',
@@ -9,22 +10,17 @@ import { CommonModule } from '@angular/common';
   styleUrl: './experiences.component.scss',
 })
 export class ExperiencesComponent implements OnInit {
-  public experienceList: any = [];
-  constructor(
-    private about: AboutApiService
-  ){
-
-  }
-  ngOnInit(): void {
+  public experienceList: Experience[] = [];
+  constructor(private about: AboutApiService) {
     this.getExperienceList();
   }
-
+  ngOnInit(): void {}
 
   getExperienceList() {
-    console.log("Experience method is called")
+    console.log('Experience method is called');
     this.about.getExperienceList().subscribe({
       next: (response) => {
-        console.log("Experience response: ", response)
+        console.log('Experience response: ', response);
         this.experienceList = response;
       },
       error: (err) => {
@@ -32,4 +28,15 @@ export class ExperiencesComponent implements OnInit {
       },
     });
   }
+
+  getSectionDescriptions(section: any): string {
+    if (!section || !Array.isArray(section)) {
+      return '';
+    }
+    return section
+    .map((s: any, index: number) => `${index + 1}. ${s.sectionDescription}`)
+    .join('<br/><br/>');
+  }
+
+
 }

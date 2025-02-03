@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { Experience } from '../interfaces/experience';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class AboutApiService {
     return this.http.get<any>(`${this.baseApiUrl}/education/get-educations`);
   }
   getExperienceList() {
-    return this.http.get<any>(`${this.baseApiUrl}/experience/get-experiences`);
+    return this.http.get<Experience[]>(`${this.baseApiUrl}/experience/get-experiences`);
   }
   getPublicationList() {
     return this.http.get<any>(
