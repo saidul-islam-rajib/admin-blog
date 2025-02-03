@@ -47,31 +47,14 @@ export class AdminLoginComponent {
       this.authService.login(this.loginForm.value)
       .subscribe({
         next: (response) => {
+          this.authService.storeToken(response.token);
           this.isLoading = false;
-          console.log("Login response:", response)
           this.router.navigate(['/dashboard']);
         },
         error: (err) => {
           this.isLoading = false;
         }
-      })
-
-      const loginData = this.loginForm.value;
-
-      // this.http.post(environment.loginUrl, loginData).subscribe({
-      //   next: (response) => {
-      //     this.isLoading = false;
-
-      //     console.log("Login response:", response)
-      //     this.router.navigate(['/dashboard']);
-      //   },
-      //   error: (err) => {
-      //     this.isLoading = false;
-      //     this.errorMessage = err.error?.message || 'Login failed. Please try again.';
-
-      //     this.router.navigate(['/404']);
-      //   },
-      // });
+      });
     }
   }
 
