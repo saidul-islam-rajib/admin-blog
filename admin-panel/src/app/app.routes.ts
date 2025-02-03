@@ -11,6 +11,7 @@ export const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
+    canActivate: [authGuard],
     data: {
       title: 'Home',
     },
@@ -19,7 +20,6 @@ export const routes: Routes = [
         path: 'dashboard',
         loadChildren: () =>
           import('./views/dashboard/routes').then((m) => m.routes),
-        canActivate: [authGuard],
       },
       {
         path: 'project',
