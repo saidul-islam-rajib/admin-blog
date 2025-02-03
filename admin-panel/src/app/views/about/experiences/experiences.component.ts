@@ -20,7 +20,6 @@ export class ExperiencesComponent implements OnInit {
     console.log('Experience method is called');
     this.about.getExperienceList().subscribe({
       next: (response) => {
-        console.log('Experience response: ', response);
         this.experienceList = response;
       },
       error: (err) => {

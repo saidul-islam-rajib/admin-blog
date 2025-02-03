@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Experience } from '../interfaces/experience';
+import { AdditionalSkill } from '../interfaces/additional-skill';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,7 @@ export class AboutApiService {
     return this.http.get<any>(`${this.baseApiUrl}/interest/get-interests`);
   }
   getAdditionalSkillList() {
-    return this.http.get<any>(
+    return this.http.get<AdditionalSkill[]>(
       `${this.baseApiUrl}/additionalSkill/get-additional-skill`
     );
   }
