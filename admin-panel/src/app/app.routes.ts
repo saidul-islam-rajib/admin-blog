@@ -35,6 +35,16 @@ export const routes: Routes = [
           import('./views/about/hobbies/routes').then((m) => m.routes),
       },
       {
+        path: 'publication',
+        loadChildren: () =>
+          import('./views/about/publications/routes').then((m) => m.routes),
+      },
+      {
+        path: 'interest',
+        loadChildren: () =>
+          import('./views/about/interests/routes').then((m) => m.routes),
+      },
+      {
         path: 'theme',
         loadChildren: () =>
           import('./views/theme/routes').then((m) => m.routes),
