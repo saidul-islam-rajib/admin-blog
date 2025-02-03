@@ -1,1 +1,21 @@
-<p>educations list works!</p>
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Institute Name</th>
+      <th scope="col">Department</th>
+      <th scope="col">Start Date</th>
+      <th scope="col">End Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let education of educationList; let i = index;" >
+      <th scope="row">{{ i }}</th>
+      <td>{{ education.instituteName }}</td>
+      <td>{{ education.department }}</td>
+      <td>{{ education.startDate | date: "MMMM dd, yyyy" }}</td>
+      <td>{{ education.endDate | date: "MMMM dd, yyyy"}}</td>
+    </tr>
+
+  </tbody>
+</table>
