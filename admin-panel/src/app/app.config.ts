@@ -12,7 +12,8 @@ import {
 import { DropdownModule, SidebarModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { StorageService } from './core/services/authentications/storage.service';
 
 export const appConfig: ApplicationConfig = {
@@ -34,6 +35,11 @@ export const appConfig: ApplicationConfig = {
     IconSetService,
     provideAnimations(),
     provideHttpClient(),
-    StorageService
+    StorageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    }
   ],
 };

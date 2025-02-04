@@ -39,6 +39,7 @@ interface IUser {
 
 @Component({
     templateUrl: 'dashboard.component.html',
+    standalone: true,
     styleUrls: ['dashboard.component.scss'],
     imports: [TextColorDirective, CardComponent, CardBodyComponent, RowComponent, ColComponent, ButtonDirective, IconDirective, ReactiveFormsModule, ButtonGroupComponent, FormCheckLabelDirective, ChartjsComponent, NgStyle, CardFooterComponent, GutterDirective, ProgressBarDirective, ProgressComponent, CardHeaderComponent, TableDirective, AvatarComponent]
 })

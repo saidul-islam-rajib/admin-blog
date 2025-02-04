@@ -11,11 +11,12 @@ import { NgToastModule } from 'ng-angular-popup';
 
 @Component({
     selector: 'app-root',
+    standalone: true,
     template: '<router-outlet /> <ng-toast></ng-toast>',
     imports: [RouterOutlet, NgToastModule]
 })
 export class AppComponent implements OnInit {
-  title = 'Rajib';
+  title = 'Blog';
 
   readonly #destroyRef: DestroyRef = inject(DestroyRef);
   readonly #activatedRoute: ActivatedRoute = inject(ActivatedRoute);

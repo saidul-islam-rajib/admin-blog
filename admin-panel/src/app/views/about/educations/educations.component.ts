@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-educations',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './educations.component.html',
   styleUrl: './educations.component.scss',
