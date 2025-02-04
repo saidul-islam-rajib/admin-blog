@@ -12,12 +12,24 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
-    name: 'Theme',
+    name: 'Post Information',
   },
   {
     name: 'Posts',
     url: 'post',
     iconComponent: { name: 'cil-drop' },
+    children: [
+      {
+        name: 'List',
+        url: '/post/list',
+        icon: 'nav-icon-bullet',
+      },
+      {
+        name: 'Add',
+        url: '/post/add',
+        icon: 'nav-icon-bullet',
+      }
+    ]
   },
   {
     name: 'Components',
