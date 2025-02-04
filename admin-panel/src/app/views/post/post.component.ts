@@ -10,45 +10,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './post.component.scss',
 })
 export class PostComponent implements OnInit {
-  postList = [
-    {
-      postId: '3ae00dff-2d33-43da-ae99-889cda5599ff',
-      postTitle: 'Testing Purpose Post',
-      postAbstract: 'This is a test post about various topics.',
-      readingMinute: 15,
-      topicIds: [1, 2, 3],
-      userId: 'User A',
-      sections: [
-        { sectionTitle: 'Introduction', sectionDescription: 'This is the introduction. Another sample post with a different topicAnother sample post with a different topicAnother sample post with a different topic' },
-        { sectionTitle: 'Details', sectionDescription: 'This section contains detailed information.' },
-      ]
-    },
-    {
-      postId: 'a123d1b7-7119-4a6d-b65f-e037dcdb9281',
-      postTitle: 'Post Title 1',
-      postAbstract: 'Another sample post with a different topic.',
-      readingMinute: 10,
-      topicIds: [4, 5],
-      userId: 'User B',
-      sections: [
-        { sectionTitle: 'Overview', sectionDescription: 'This section provides an overview.' }
-      ]
-    },
-    {
-      postId: 'b456d1b7-7119-4a6d-b65f-e037dcdb9299',
-      postTitle: 'Post Title 2',
-      postAbstract: 'This post has no sections.',
-      readingMinute: 8,
-      topicIds: [6],
-      userId: 'User C',
-      sections: []
-    }
-  ];
+  postList: Post[] = [];
 
   constructor(private postService: PostApiService) {}
 
   ngOnInit(): void {
-    //this.getPostList();
+    this.getPostList();
   }
 
   getPostList() {
