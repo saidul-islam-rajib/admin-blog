@@ -18,7 +18,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './add-post.component.scss',
 })
 export class AddPostComponent implements OnInit {
-  educationForm: FormGroup;
+  educationForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,

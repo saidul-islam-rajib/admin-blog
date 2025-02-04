@@ -1,21 +1,41 @@
-<table class="table table-hover table-striped">
+<table class="table table-hover table-striped text-start align-middle justify-content-center">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Institute Name</th>
-      <th scope="col">Department</th>
-      <th scope="col">Start Date</th>
-      <th scope="col">End Date</th>
+      <th scope="col" rowspan="2">#</th>
+      <th scope="col" rowspan="2">Post Title</th>
+      <th scope="col" rowspan="2">Reading Minutes</th>
+      <th scope="col" rowspan="2">Topics</th>
+      <th scope="col" rowspan="2">Posted User</th>
+      <th scope="col" colspan="2" class="text-center">Sections</th>
+    </tr>
+    <tr>
+      <th scope="col" [attr.rowspan]="4" [width]="200" text-align: justify class="text-center">Section Title</th>
+      <th scope="col"[attr.rowspan]="4" class="text-center">Section Description</th>
     </tr>
   </thead>
   <tbody>
-    <tr  >
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+    <ng-container *ngFor="let post of postList; let i = index">
+      <!-- First row for each post -->
+      <tr>
+        <td [attr.rowspan]="post.sections.length || 1">{{ i + 1 }}</td>
+        <td [attr.rowspan]="post.sections.length || 1">{{ post.postTitle }}</td>
+        <td [attr.rowspan]="post.sections.length || 1">{{ post.readingMinute }}</td>
+        <td [attr.rowspan]="post.sections.length || 1" [innerHTML]="getPostTopicInformation(post.topicIds)"></td>
+        <td [attr.rowspan]="post.sections.length || 1">{{ post.userId }}</td>
 
+        <!-- First Section -->
+        <td *ngIf="post.sections.length > 0">{{ post.sections[0].sectionTitle }}</td>
+        <td *ngIf="post.sections.length > 0">{{ post.sections[0].sectionDescription }}</td>
+
+        <!-- If No Sections -->
+        <td *ngIf="post.sections.length === 0" colspan="2" class="text-center" >No Sections</td>
+      </tr>
+
+      <!-- Additional Section Rows -->
+      <tr *ngFor="let section of post.sections.slice(1)">
+        <td>{{ section.sectionTitle }}</td>
+        <td>{{ section.sectionDescription }}</td>
+      </tr>
+    </ng-container>
   </tbody>
 </table>
