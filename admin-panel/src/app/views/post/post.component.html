@@ -1,4 +1,4 @@
-<table class="table table-hover table-striped">
+<table class="table table-hover table-striped align-middle">
   <thead>
     <tr>
       <th scope="col" rowspan="2">#</th>
@@ -33,6 +33,7 @@
                 {{ section.sectionDescription }}
               </div>
             </div>
+            <td *ngIf="post.sections.length === 0" colspan="2" class="text-center"><span class="text-danger">No Sections</span></td>
           </div>
         </td>
       </tr>
