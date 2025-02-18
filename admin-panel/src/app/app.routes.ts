@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './layout';
 import { authGuard } from '../app/guards/auth.guard';
+import { authRedirectGuard } from './guards/auth-redirect.guard';
 
 export const routes: Routes = [
   {
@@ -23,8 +24,7 @@ export const routes: Routes = [
       },
       {
         path: 'post',
-        loadChildren: () =>
-          import('./views/post/routes').then((m) => m.routes),
+        loadChildren: () => import('./views/post/routes').then((m) => m.routes),
       },
       {
         path: 'project',
@@ -94,6 +94,7 @@ export const routes: Routes = [
       import('./views/pages/admin-login/admin-login.component').then(
         (m) => m.AdminLoginComponent
       ),
+    canActivate: [authRedirectGuard],
     data: {
       title: 'Login Page',
     },
@@ -104,6 +105,7 @@ export const routes: Routes = [
       import('./views/pages/admin-login/admin-login.component').then(
         (m) => m.AdminLoginComponent
       ),
+    canActivate: [authRedirectGuard],
     data: {
       title: 'Register Page',
     },
