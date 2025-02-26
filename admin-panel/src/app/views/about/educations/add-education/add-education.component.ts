@@ -9,20 +9,28 @@ import {
   Validators,
 } from '@angular/forms';
 import { environment } from '../../../../../environments/environment';
+import { DomSanitizer } from '@angular/platform-browser';
+import {
+  FileSystemFileEntry,
+  NgxFileDropEntry,
+  NgxFileDropModule,
+} from 'ngx-file-drop';
 
 @Component({
   selector: 'app-add-education',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, NgxFileDropModule],
   templateUrl: './add-education.component.html',
   styleUrl: './add-education.component.scss',
 })
 export class AddEducationComponent {
   educationForm: FormGroup;
+  instituteLogoPreview: string | ArrayBuffer | null = null;
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private sanitizer: DomSanitizer
   ) {
     this.educationForm = this.fb.group({
       instituteName: ['', Validators.required],
@@ -34,7 +42,6 @@ export class AddEducationComponent {
       educationSection: this.fb.array([]),
     });
 
-    // Disable endDate if isCurrentStudent is true
     const isCurrentStudentControl = this.educationForm.get('isCurrentStudent');
     const endDateControl = this.educationForm.get('endDate');
 
@@ -49,12 +56,22 @@ export class AddEducationComponent {
     }
   }
 
-  // Getter for educationSections FormArray
+  ngOnInit(): void {
+    this.educationForm
+      .get('isCurrentStudent')
+      ?.valueChanges.subscribe((value) => {
+        if (value) {
+          this.educationForm.get('endDate')?.disable();
+        } else {
+          this.educationForm.get('endDate')?.enable();
+        }
+      });
+  }
+
   get educationSection(): FormArray {
     return this.educationForm.get('educationSection') as FormArray;
   }
 
-  // Add a new education section
   addSection(): void {
     this.educationSection.push(
       this.fb.group({
@@ -63,17 +80,47 @@ export class AddEducationComponent {
     );
   }
 
-  // Remove an education section by index
   removeSection(index: number): void {
     this.educationSection.removeAt(index);
   }
 
-  // Handle form submission
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.educationForm.patchValue({ instituteLogo: file });
+      this.previewImage(file);
+    }
+  }
+
+  dropped(files: NgxFileDropEntry[]): void {
+    for (const droppedFile of files) {
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        fileEntry.file((file: File) => {
+          this.educationForm.patchValue({ instituteLogo: file });
+          this.previewImage(file);
+        });
+      }
+    }
+  }
+
+  previewImage(file: File): void {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.instituteLogoPreview = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
   onSubmit(): void {
     if (this.educationForm.valid) {
-      const formData = this.educationForm.value;
+      const formData = this.createFormData();
 
-      this.http.post(environment.educationPost('1EC6473A-3C18-49A5-A460-986879BB9CBE'), formData)
+      this.http
+        .post(
+          environment.educationPost('1B06E929-655D-479B-8F96-6A30A7BE8851'),
+          formData
+        )
         .subscribe({
           next: (response) => {
             alert('Education details submitted successfully!');
@@ -85,6 +132,48 @@ export class AddEducationComponent {
         });
     } else {
       console.error('Form is invalid');
+    }
+  }
+
+  private createFormData(): FormData {
+    const formData = new FormData();
+
+    formData.append(
+      'instituteName',
+      this.educationForm.get('instituteName')?.value
+    );
+    formData.append('department', this.educationForm.get('department')?.value);
+    formData.append(
+      'isCurrentStudent',
+      this.educationForm.get('isCurrentStudent')?.value
+    );
+    formData.append('startDate', this.educationForm.get('startDate')?.value);
+    formData.append('endDate', this.educationForm.get('endDate')?.value);
+
+    this.addEducationSectionsToFormData(formData);
+    this.addInstituteLogoToFormData(formData);
+
+    return formData;
+  }
+
+  private addEducationSectionsToFormData(formData: FormData): void {
+    const educationSections = this.educationForm.get('educationSection')?.value;
+    educationSections.forEach((section: any, index: number) => {
+      formData.append(
+        `educationSection[${index}].sectionDescripton`,
+        section.sectionDescripton
+      );
+    });
+  }
+
+  private addInstituteLogoToFormData(formData: FormData): void {
+    const instituteLogoFile = this.educationForm.get('instituteLogo')?.value;
+    if (instituteLogoFile) {
+      formData.append(
+        'instituteLogo',
+        instituteLogoFile,
+        instituteLogoFile.name
+      );
     }
   }
 }
