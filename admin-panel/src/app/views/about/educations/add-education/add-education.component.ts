@@ -15,17 +15,24 @@ import {
   NgxFileDropEntry,
   NgxFileDropModule,
 } from 'ngx-file-drop';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @Component({
   selector: 'app-add-education',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgxFileDropModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    NgxFileDropModule,
+    NgxDropzoneModule,
+  ],
   templateUrl: './add-education.component.html',
   styleUrl: './add-education.component.scss',
 })
 export class AddEducationComponent {
   educationForm: FormGroup;
   instituteLogoPreview: string | ArrayBuffer | null = null;
+  files: File[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -84,37 +91,10 @@ export class AddEducationComponent {
     this.educationSection.removeAt(index);
   }
 
-  onFileSelected(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      this.educationForm.patchValue({ instituteLogo: file });
-      this.previewImage(file);
-    }
-  }
-
-  dropped(files: NgxFileDropEntry[]): void {
-    for (const droppedFile of files) {
-      if (droppedFile.fileEntry.isFile) {
-        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-        fileEntry.file((file: File) => {
-          this.educationForm.patchValue({ instituteLogo: file });
-          this.previewImage(file);
-        });
-      }
-    }
-  }
-
-  previewImage(file: File): void {
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.instituteLogoPreview = reader.result;
-    };
-    reader.readAsDataURL(file);
-  }
-
   onSubmit(): void {
     if (this.educationForm.valid) {
       const formData = this.createFormData();
+      console.log("valid form data : ", formData)
 
       this.http
         .post(
@@ -175,5 +155,26 @@ export class AddEducationComponent {
         instituteLogoFile.name
       );
     }
+  }
+
+  onSelect(event: any) {
+    for (let file of event.addedFiles) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        file.preview = reader.result;
+        this.instituteLogoPreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    this.files.push(...event.addedFiles);
+
+    if (this.files.length > 0) {
+      this.educationForm.patchValue({ instituteLogo: this.files[0] });
+    }
+  }
+
+  onRemove(event: any) {
+    this.files.splice(this.files.indexOf(event), 1);
   }
 }
