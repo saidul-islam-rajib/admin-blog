@@ -22,10 +22,8 @@ export class PostComponent implements OnInit {
     this.postService.getPostList().subscribe({
       next: (response) => {
         this.postList = response;
-        console.log('List of post : ', this.postList);
       },
       error: (err) => {
-        console.log('Error while loading list of posts', err);
       },
     });
   }
@@ -37,15 +35,20 @@ export class PostComponent implements OnInit {
 
     return section
       .map((s, index) => {
-        const items = s.items
-          ?.map((item, i) => `&nbsp;&nbsp;- ${item.itemTitle}: ${item.itemDescription}`)
-          .join('<br/>') || 'No items available';
+        const items =
+          s.items
+            ?.map(
+              (item, i) =>
+                `&nbsp;&nbsp;- ${item.itemTitle}: ${item.itemDescription}`
+            )
+            .join('<br/>') || 'No items available';
 
-        return `<b>${index + 1}. ${s.sectionTitle}</b><br/>${s.sectionDescription}<br/>${items}`;
+        return `<b>${index + 1}. ${s.sectionTitle}</b><br/>${
+          s.sectionDescription
+        }<br/>${items}`;
       })
       .join('<br/><br/>');
   }
-
 
   getPostTopicInformation(topics: any[]) {
     if (!topics || !Array.isArray(topics)) {

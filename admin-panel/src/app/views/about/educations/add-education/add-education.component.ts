@@ -93,8 +93,6 @@ export class AddEducationComponent {
   onSubmit(): void {
     if (this.educationForm.valid) {
       const formData = this.createFormData();
-      console.log("valid form data : ", formData)
-
       this.http
         .post(
           environment.educationPost('2A52F7D6-7EB0-44D8-8513-3572375E3613'),

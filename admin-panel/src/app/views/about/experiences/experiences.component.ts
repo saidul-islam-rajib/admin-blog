@@ -17,13 +17,11 @@ export class ExperiencesComponent implements OnInit {
   ngOnInit(): void {}
 
   getExperienceList() {
-    console.log('Experience method is called');
     this.about.getExperienceList().subscribe({
       next: (response) => {
         this.experienceList = response;
       },
       error: (err) => {
-        console.log('Error in experience list loading: ', err.error.message);
       },
     });
   }

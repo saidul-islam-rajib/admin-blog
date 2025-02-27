@@ -19,10 +19,8 @@ export class ProjectsComponent {
     this.about.getProjectList().subscribe({
       next: (response) => {
         this.projectList = response;
-        console.log("list of project ", this.projectList)
       },
       error: (err) => {
-        console.log('Error while loading project list', err.error.message);
       },
     });
   }

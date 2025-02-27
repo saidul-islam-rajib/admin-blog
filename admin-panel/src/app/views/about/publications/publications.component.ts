@@ -18,11 +18,9 @@ export class PublicationsComponent {
   getPublicationList() {
     this.about.getPublicationList().subscribe({
       next: (response) => {
-        console.log('Publication list : ', response);
         this.publicationList = response;
       },
       error: (err) => {
-        console.log('Errr while loading publication list');
       },
     });
   }

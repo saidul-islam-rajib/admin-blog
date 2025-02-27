@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Experience } from '../interfaces/experience';
 import { AdditionalSkill } from '../interfaces/additional-skill';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -35,5 +36,9 @@ export class AboutApiService {
     return this.http.get<AdditionalSkill[]>(
       `${this.baseApiUrl}/additionalSkill/get-additional-skill`
     );
+  }
+
+  deleteEducation(educationId: any, userId: any): Observable<any> {
+    return this.http.delete(`${this.baseApiUrl}/education/${educationId}/delete/user/${userId}`);
   }
 }

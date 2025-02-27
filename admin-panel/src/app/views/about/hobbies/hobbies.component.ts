@@ -25,7 +25,6 @@ export class HobbiesComponent implements OnInit {
         this.hobbyList = response;
       },
       error: (err) => {
-        console.log('Error in hobby list loading: ', err.error.message);
       },
     });
   }

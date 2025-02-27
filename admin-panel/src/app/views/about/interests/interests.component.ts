@@ -22,7 +22,6 @@ export class InterestsComponent {
         this.interestList = response;
       },
       error: (err) => {
-        console.log('Error in interest list loading: ', err.error.message);
       },
     });
   }

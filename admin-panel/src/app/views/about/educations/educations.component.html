@@ -16,7 +16,7 @@
       <td>{{ education.department }}</td>
       <td>{{ education.startDate | date: "MMMM dd, yyyy" }}</td>
       <td>{{ education.endDate | date: "MMMM dd, yyyy"}}</td>
-      <td><i class="fa fa-trash" style="font-size:15px; cursor:pointer;" (click)="deleteEducation(i)"></i></td>
+      <td><i class="fa fa-trash" style="font-size:15px; cursor:pointer;" (click)="deleteEducation(education.educationId)"></i></td>
     </tr>
 
   </tbody>

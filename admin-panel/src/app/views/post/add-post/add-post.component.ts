@@ -20,10 +20,7 @@ import { HttpClient } from '@angular/common/http';
 export class AddPostComponent implements OnInit {
   educationForm!: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private apiService: PostApiService
-  ) {}
+  constructor(private fb: FormBuilder, private apiService: PostApiService) {}
 
   ngOnInit(): void {
     this.educationForm = this.fb.group({
@@ -57,13 +54,9 @@ export class AddPostComponent implements OnInit {
 
   onSubmit(): void {
     if (this.educationForm.valid) {
-      console.log("valid form: ", this.educationForm.value);
-
       this.apiService.getPostList().subscribe({
-        next: (response) => {
-          console.log("Response data list : ", response)
-        }
-      })
+        next: (response) => {},
+      });
     } else {
       this.educationForm.markAllAsTouched();
     }
