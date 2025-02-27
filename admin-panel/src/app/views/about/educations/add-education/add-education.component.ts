@@ -9,13 +9,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { environment } from '../../../../../environments/environment';
-import { DomSanitizer } from '@angular/platform-browser';
 import {
-  FileSystemFileEntry,
-  NgxFileDropEntry,
   NgxFileDropModule,
 } from 'ngx-file-drop';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-add-education',
@@ -25,6 +23,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     ReactiveFormsModule,
     NgxFileDropModule,
     NgxDropzoneModule,
+    RouterModule
   ],
   templateUrl: './add-education.component.html',
   styleUrl: './add-education.component.scss',
@@ -37,7 +36,7 @@ export class AddEducationComponent {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private sanitizer: DomSanitizer
+    private router: Router
   ) {
     this.educationForm = this.fb.group({
       instituteName: ['', Validators.required],
@@ -82,7 +81,7 @@ export class AddEducationComponent {
   addSection(): void {
     this.educationSection.push(
       this.fb.group({
-        sectionDescripton: ['', Validators.required],
+        sectionDescription: ['', Validators.required],
       })
     );
   }
@@ -98,13 +97,14 @@ export class AddEducationComponent {
 
       this.http
         .post(
-          environment.educationPost('1B06E929-655D-479B-8F96-6A30A7BE8851'),
+          environment.educationPost('2A52F7D6-7EB0-44D8-8513-3572375E3613'),
           formData
         )
         .subscribe({
           next: (response) => {
             alert('Education details submitted successfully!');
             this.educationForm.reset();
+            this.router.navigate(['/education/list']);
           },
           error: (error) => {
             alert('Failed to submit education details.');
@@ -140,8 +140,8 @@ export class AddEducationComponent {
     const educationSections = this.educationForm.get('educationSection')?.value;
     educationSections.forEach((section: any, index: number) => {
       formData.append(
-        `educationSection[${index}].sectionDescripton`,
-        section.sectionDescripton
+        `educationSection[${index}].sectionDescription`,
+        section.sectionDescription
       );
     });
   }
