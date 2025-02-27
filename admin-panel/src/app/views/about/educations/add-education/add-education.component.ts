@@ -14,6 +14,8 @@ import {
 } from 'ngx-file-drop';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { Router, RouterModule } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
+import { Colors } from '../../../notifications/toasters/toasters.component';
 
 @Component({
   selector: 'app-add-education',
@@ -36,7 +38,8 @@ export class AddEducationComponent {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private toast: NgToastService
   ) {
     this.educationForm = this.fb.group({
       instituteName: ['', Validators.required],
@@ -99,17 +102,17 @@ export class AddEducationComponent {
           formData
         )
         .subscribe({
-          next: (response) => {
-            alert('Education details submitted successfully!');
+          next: () => {
+            this.toast.success(Colors.success, "Added successfully", 2000);
             this.educationForm.reset();
             this.router.navigate(['/education/list']);
           },
-          error: (error) => {
-            alert('Failed to submit education details.');
+          error: () => {
+            this.toast.danger(Colors.danger, 'Failed to create new post', 2000);
           },
         });
     } else {
-      console.error('Form is invalid');
+      this.toast.warning(Colors.warning, 'Invalid form', 2000);
     }
   }
 
