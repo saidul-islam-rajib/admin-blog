@@ -6,6 +6,7 @@
       <th scope="col">Department</th>
       <th scope="col">Start Date</th>
       <th scope="col">End Date</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +16,7 @@
       <td>{{ education.department }}</td>
       <td>{{ education.startDate | date: "MMMM dd, yyyy" }}</td>
       <td>{{ education.endDate | date: "MMMM dd, yyyy"}}</td>
+      <td><i class="fa fa-trash" style="font-size:15px; cursor:pointer;" (click)="deleteEducation(i)"></i></td>
     </tr>
 
   </tbody>

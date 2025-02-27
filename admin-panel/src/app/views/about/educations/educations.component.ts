@@ -31,4 +31,7 @@ export class EducationsComponent implements OnInit {
       }
     });
   }
+  deleteEducation(educationId: any){
+
+  }
 }
