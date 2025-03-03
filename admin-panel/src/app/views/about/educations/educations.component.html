@@ -6,6 +6,7 @@
       <th scope="col">Department</th>
       <th scope="col">Start Date</th>
       <th scope="col">End Date</th>
+      <th scope="col">Description</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -16,7 +17,18 @@
       <td>{{ education.department }}</td>
       <td>{{ education.startDate | date: "MMMM dd, yyyy" }}</td>
       <td>{{ education.endDate | date: "MMMM dd, yyyy"}}</td>
-      <td><i class="fa fa-trash" style="font-size:15px; cursor:pointer;" (click)="deleteEducation(education.educationId)"></i></td>
+      <td>
+        <ul style="list-style-type: none;">
+          <li *ngFor="let section of education.educationSection">
+            <ul >
+              <li >{{ section.sectionDescription }}</li>
+            </ul>
+          </li>
+        </ul>
+      </td>
+      <td>
+        <i class="fa fa-trash" style="font-size:15px; cursor:pointer;" (click)="deleteEducation(education.educationId)"></i>
+      </td>
     </tr>
 
   </tbody>
