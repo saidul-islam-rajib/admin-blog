@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AboutApiService } from '../../../core/services/about-api.service';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { Education } from '../../../core/interfaces/education';
 import { NgToastService } from 'ng-angular-popup';
 import { Colors } from '../../notifications/toasters/toasters.component';
+import { AuthService } from '../../../core/services/authentications/auth.service';
 
 @Component({
   selector: 'app-educations',
@@ -15,11 +15,15 @@ import { Colors } from '../../notifications/toasters/toasters.component';
 })
 export class EducationsComponent implements OnInit {
   public educationList: Education[] = [];
+  loggedUserId: string | null;
 
   constructor(
     private about: AboutApiService,
-    private toast: NgToastService
-  ) {}
+    private toast: NgToastService,
+    private auth: AuthService
+  ) {
+    this.loggedUserId = this.auth.getUserIdFromToken();
+  }
   ngOnInit(): void {
     this.getEducationList();
   }
@@ -40,7 +44,7 @@ export class EducationsComponent implements OnInit {
       );
 
       this.about
-        .deleteEducation(educationId, '2A52F7D6-7EB0-44D8-8513-3572375E3613')
+        .deleteEducation(educationId, this.loggedUserId)
         .subscribe({
           next: () => {
             this.toast.success(Colors.success, 'Deleted', 2000);

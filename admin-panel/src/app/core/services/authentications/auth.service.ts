@@ -62,4 +62,11 @@ export class AuthService {
       return this.userPayload.role;
     }
   }
+
+  getUserIdFromToken(): string | null {    
+    if (this.userPayload && this.userPayload.sub) {
+      return this.userPayload.sub;
+    }
+    return null;
+  }
 }
