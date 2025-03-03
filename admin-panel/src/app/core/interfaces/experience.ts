@@ -1,4 +1,5 @@
 export interface Experience{
+  experienceId: string;
   companyName: string;
   shortName: string;
   companyLogo: string;

@@ -7,12 +7,13 @@
       <th scope="col">Full_Time</th>
       <th scope="col">Employement</th>
       <th scope="col">Description</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let experience of experienceList; let i = index">
       <th scope="row">{{ i + 1 }}</th>
-      <td>{{ experience.companyName }}</td>
+      <td><i (click)="updateExperienceInformation(experience)" >{{ experience.companyName }}</i></td>
       <td>{{ experience.designation }}</td>
       <td>{{ experience.isFullTimeEmployee ? "Yes" : "No" }}</td>
       <td>
@@ -27,6 +28,9 @@
       <td
         [innerHTML]="getSectionDescriptions(experience.experienceSection)"
       ></td>
+      <td>
+        <i class="fa fa-trash" style="font-size:15px; cursor:pointer;" (click)="deleteExperience(experience.experienceId)"></i>
+      </td>
     </tr>
   </tbody>
 </table>

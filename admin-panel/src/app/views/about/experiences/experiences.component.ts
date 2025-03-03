@@ -32,7 +32,14 @@ export class ExperiencesComponent implements OnInit {
     }
     return section
     .map((s: any, index: number) => `${index + 1}. ${s.sectionDescription}`)
-    .join('<br/><br/>');
+    .join('<br/>');
+  }
+  
+  deleteExperience(experienceId: any){
+
+  }
+  updateExperienceInformation(experience: any){
+
   }
 
 
