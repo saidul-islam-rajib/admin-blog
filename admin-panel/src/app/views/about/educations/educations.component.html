@@ -12,7 +12,7 @@
   <tbody>
     <tr *ngFor="let education of educationList; let i = index;" >
       <th scope="row">{{ i+1 }}</th>
-      <td>{{ education.instituteName }}</td>
+      <td><i (click)="updateInstituteInformation(education)" >{{ education.instituteName }}</i></td>
       <td>{{ education.department }}</td>
       <td>{{ education.startDate | date: "MMMM dd, yyyy" }}</td>
       <td>{{ education.endDate | date: "MMMM dd, yyyy"}}</td>

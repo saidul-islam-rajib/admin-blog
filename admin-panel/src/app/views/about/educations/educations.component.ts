@@ -5,6 +5,7 @@ import { Education } from '../../../core/interfaces/education';
 import { NgToastService } from 'ng-angular-popup';
 import { Colors } from '../../notifications/toasters/toasters.component';
 import { AuthService } from '../../../core/services/authentications/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-educations',
@@ -20,7 +21,8 @@ export class EducationsComponent implements OnInit {
   constructor(
     private about: AboutApiService,
     private toast: NgToastService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {
     this.loggedUserId = this.auth.getUserIdFromToken();
   }
@@ -55,5 +57,10 @@ export class EducationsComponent implements OnInit {
           },
         });
     }
+  }
+
+  updateInstituteInformation(education: any){
+    const educationId = education.educationId;
+    this.router.navigate(['/education/edit/'+educationId])
   }
 }
