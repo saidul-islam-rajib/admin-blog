@@ -25,8 +25,8 @@ export const routes: Routes = [
       {
         path: 'add',
         loadComponent: () =>
-          import('./add-experience/add-experience.component').then(
-            (m) => m.AddExperienceComponent
+          import('./add-edit-experience/add-edit-experience.component').then(
+            (m) => m.AddEditExperienceComponent
           ),
         data: {
           title: 'Add'
