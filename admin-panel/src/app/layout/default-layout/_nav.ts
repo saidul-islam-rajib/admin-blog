@@ -67,11 +67,6 @@ export const navItems: INavData[] = [
         url: '/education/add',
         icon: 'nav-icon-bullet',
       },
-      {
-        name: 'Edit',
-        url: '/education/edit/:id',
-        icon: 'nav-icon-bullet',
-      },
     ],
   },
   {

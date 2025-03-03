@@ -4,5 +4,7 @@ export const environment = {
   baseUrl: 'https://localhost:5050',
   registerUrl: 'https://localhost:5050/Authentication/register',
   loginUrl: 'https://localhost:5050/Authentication/login',
-  educationPost: (userId: string) => `https://localhost:5050/education/create/user/${userId}`
+  educationPost: (userId: string) => `https://localhost:5050/education/create/user/${userId}`,
+  getEducationDetails: (educationId: string) => `https://localhost:5050/education/get-by-id/${educationId}`,
+  updateEducation: (educationId: string, userId: string) => `https://localhost:5050/education/update/${educationId}/user/${userId}`
 };

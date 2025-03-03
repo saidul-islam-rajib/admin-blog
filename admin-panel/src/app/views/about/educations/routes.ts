@@ -25,8 +25,8 @@ export const routes: Routes = [
       {
         path: 'add',
         loadComponent: () =>
-          import('./add-education/add-education.component').then(
-            (m) => m.AddEducationComponent
+          import('./add-edit-education/add-edit-education.component').then(
+            (m) => m.AddEditEducationComponent
           ),
         data: {
           title: 'Add',
@@ -35,8 +35,8 @@ export const routes: Routes = [
       {
         path: 'edit/:id',
         loadComponent: () =>
-          import('./edit-education/edit-education.component').then(
-            (m) => m.EditEducationComponent
+          import('./add-edit-education/add-edit-education.component').then(
+            (m) => m.AddEditEducationComponent
           ),
         data: {
           title: 'Edit',
