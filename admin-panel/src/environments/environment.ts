@@ -10,4 +10,5 @@ export const environment = {
 
   getExperienceDetails: (id: string) => `https://localhost:5050/experience/get-by-id/${id}`,
   experiencePost: (userId: string) => `https://localhost:5050/experience/users/${userId}/create`,
+  updateExperience: (id: string, userId: string) => `https://localhost:5050/experience/update-experience/${id}/user/${userId}`
 };

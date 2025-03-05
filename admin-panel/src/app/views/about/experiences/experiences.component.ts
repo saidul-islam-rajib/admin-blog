@@ -44,7 +44,7 @@ export class ExperiencesComponent implements OnInit {
   }
   updateExperienceInformation(experience: any){
     const experienceId = experience.experienceId;
-    this.router.navigate(['/education/edit/'+experienceId])
+    this.router.navigate(['/experience/edit/'+experienceId])
   }
 
 
