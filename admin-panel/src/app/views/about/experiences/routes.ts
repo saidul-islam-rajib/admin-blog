@@ -31,6 +31,16 @@ export const routes: Routes = [
         data: {
           title: 'Add'
         }
+      },
+      {
+        path: 'edit/:id',
+        loadComponent: () =>
+          import('./add-edit-experience/add-edit-experience.component').then(
+            (m) => m.AddEditExperienceComponent
+          ),
+        data: {
+          title: 'Edit'
+        }
       }
     ],
   },

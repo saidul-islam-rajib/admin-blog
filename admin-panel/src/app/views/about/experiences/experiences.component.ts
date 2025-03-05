@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AboutApiService } from '../../../core/services/about-api.service';
 import { CommonModule } from '@angular/common';
 import { Experience } from '../../../core/interfaces/experience';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-experiences',
@@ -11,7 +12,10 @@ import { Experience } from '../../../core/interfaces/experience';
 })
 export class ExperiencesComponent implements OnInit {
   public experienceList: Experience[] = [];
-  constructor(private about: AboutApiService) {
+  constructor(
+    private about: AboutApiService,
+    private router: Router
+  ) {
     this.getExperienceList();
   }
   ngOnInit(): void {}
@@ -39,7 +43,8 @@ export class ExperiencesComponent implements OnInit {
 
   }
   updateExperienceInformation(experience: any){
-
+    const experienceId = experience.experienceId;
+    this.router.navigate(['/education/edit/'+experienceId])
   }
 
 
