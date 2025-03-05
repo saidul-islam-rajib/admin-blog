@@ -41,4 +41,7 @@ export class AboutApiService {
   deleteEducation(educationId: any, userId: any): Observable<any> {
     return this.http.delete(`${this.baseApiUrl}/education/${educationId}/delete/user/${userId}`);
   }
+  deleteExperience(id: any, userId: any): Observable<any> {
+    return this.http.delete(`${this.baseApiUrl}/experience/delete-experience/${id}/user/${userId}`);
+  }
 }
