@@ -25,8 +25,8 @@ export const routes: Routes = [
       {
         path: 'add',
         loadComponent: () =>
-          import('./add-interest/add-interest.component').then(
-            (m) => m.AddInterestComponent
+          import('./add-edit-interest/add-edit-interest.component').then(
+            (m) => m.AddEditInterestComponent
           ),
         data: {
           title: 'Add'
