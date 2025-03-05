@@ -42,11 +42,6 @@ export const routes: Routes = [
           import('./views/about/experiences/routes').then((m) => m.routes),
       },
       {
-        path: 'hobby',
-        loadChildren: () =>
-          import('./views/about/hobbies/routes').then((m) => m.routes),
-      },
-      {
         path: 'publication',
         loadChildren: () =>
           import('./views/about/publications/routes').then((m) => m.routes),

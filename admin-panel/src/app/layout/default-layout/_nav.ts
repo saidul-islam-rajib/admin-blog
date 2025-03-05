@@ -87,23 +87,6 @@ export const navItems: INavData[] = [
     ],
   },
   {
-    name: 'Hobby',
-    url: '/hobby',
-    iconComponent: { name: 'cil-puzzle' },
-    children: [
-      {
-        name: 'List',
-        url: '/hobby/list',
-        icon: 'nav-icon-bullet',
-      },
-      {
-        name: 'Add',
-        url: '/hobby/add',
-        icon: 'nav-icon-bullet',
-      },
-    ],
-  },
-  {
     name: 'Publication',
     url: '/publication',
     iconComponent: { name: 'cil-puzzle' },
