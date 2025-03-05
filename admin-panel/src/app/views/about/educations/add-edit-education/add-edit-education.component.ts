@@ -48,7 +48,6 @@ export class AddEditEducationComponent implements OnInit {
     // Check if it's edit mode
     this.route.paramMap.subscribe((params) => {
       this.educationId = params.get('id');
-      console.log('Educationn id from route : ', this.educationId);
       if (this.educationId) {
         this.isEditMode = true;
         this.loadEducationDetails(this.educationId);
@@ -98,7 +97,6 @@ export class AddEditEducationComponent implements OnInit {
   private loadEducationDetails(educationId: string): void {
     this.http.get<any>(environment.getEducationDetails(educationId)).subscribe({
       next: (data) => {
-        console.log("Educational Details data : ", data)
         this.educationForm.patchValue({
           instituteName: data.instituteName,
           department: data.department,
@@ -123,7 +121,6 @@ export class AddEditEducationComponent implements OnInit {
 
         // Load institute logo
         if (data.instituteLogo) {
-          console.log('inside here: ', data.instituteLogo);
           this.instituteLogoPreview = data.instituteLogo;
         }
       },
