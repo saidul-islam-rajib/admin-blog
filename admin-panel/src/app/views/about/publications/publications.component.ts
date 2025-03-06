@@ -41,7 +41,7 @@ export class PublicationsComponent {
 
     return keys
       .map((s: any, index: number) => `${index + 1}. ${s.key}`)
-      .join('<br/><br/>');
+      .join('<br/>');
   }
 
   deletePublication(publicationId: any){
