@@ -14,5 +14,9 @@ export const environment = {
 
   getInterestDetails: (id: string) => `https://localhost:5050/interest/${id}`,
   postInterest: (userId: string) => `https://localhost:5050/interest/users/${userId}/create-interest`,
-  updateInterest: (id: string, userId: string) => `https://localhost:5050/interest/update-interest/${id}/user/${userId}`
+  updateInterest: (id: string, userId: string) => `https://localhost:5050/interest/update-interest/${id}/user/${userId}`,
+  
+  getPublicationDetails: (id: string) => `https://localhost:5050/interest/${id}`,
+  postPublication: (userId: string) => `https://localhost:5050/publication/users/${userId}/create-publication`,
+  updatePublication: (id: string, userId: string) => `https://localhost:5050/interest/update-interest/${id}/user/${userId}`
 };
