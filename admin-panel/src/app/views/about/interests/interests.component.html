@@ -9,7 +9,7 @@
   <tbody>
     <tr *ngFor="let interest of interestList; let i = index">
       <th scope="row">{{ i + 1 }}</th>
-      <td>{{ interest.title }}</td>
+      <td><i (click)="updateInterest(interest)">{{ interest.title }}</i></td>
       <td
         [innerHTML]="getInterestKeys(interest.keys)"
       ></td>

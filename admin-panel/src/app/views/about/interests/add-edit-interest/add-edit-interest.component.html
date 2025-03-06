@@ -1,1 +1,99 @@
-<p>add-edit-interest works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">
+            <i class="cil-school"></i>
+            {{ isEditMode ? "Edit Interest Details" : "Add Interest Details" }}
+          </h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="interestForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input
+                id="title"
+                formControlName="title"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Image</label>
+              <div>
+                <ngx-dropzone (change)="onSelect($event)">
+                  <ngx-dropzone-label>Drop the image here</ngx-dropzone-label>
+                  <ngx-dropzone-preview
+                    *ngFor="let file of files"
+                    [removable]="true"
+                    (removed)="onRemove(file)"
+                  >
+                    <ngx-dropzone-label>{{ file.name }}</ngx-dropzone-label>
+                  </ngx-dropzone-preview>
+                </ngx-dropzone>
+              </div>
+              <div class="mt-2">
+                <ngx-dropzone-image-preview
+                  ngProjectAs="ngx-dropzone-preview"
+                  *ngFor="let f of files"
+                  [file]="f"
+                >
+                </ngx-dropzone-image-preview>
+              </div>
+              <div *ngIf="isEditMode && interestImagePreview">
+                <img
+                  [src]="interestImagePreview"
+                  alt="Image is not found"
+                  class="img-thumbnail mt-2"
+                  style="max-width: 200px"
+                />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Interest Keys</label>
+              <div formArrayName="keys">
+                <div
+                  *ngFor="let section of keys.controls; let i = index"
+                  [formGroupName]="i"
+                  class="border p-3 rounded mb-2"
+                >
+                  <input
+                    id="key-{{ i }}"
+                    formControlName="key"
+                    class="form-control mb-2"
+                    placeholder="Enter key name"
+                  />
+                  <button
+                    type="button"
+                    (click)="removeSection(i)"
+                    class="btn btn-danger btn-sm"
+                  >
+                    Remove
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  (click)="addSection()"
+                  class="btn btn-secondary btn-sm"
+                >
+                  Add Section
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              [disabled]="interestForm.invalid"
+              class="btn btn-primary w-100"
+            >
+              {{ isEditMode ? "Update" : "Submit" }}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

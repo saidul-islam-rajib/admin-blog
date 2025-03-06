@@ -31,6 +31,16 @@ export const routes: Routes = [
         data: {
           title: 'Add'
         }
+      },
+      {
+        path: 'edit/:id',
+        loadComponent: () =>
+          import('./add-edit-interest/add-edit-interest.component').then(
+            (m) => m.AddEditInterestComponent
+          ),
+        data: {
+          title: 'Edit'
+        }
       }
     ],
   },

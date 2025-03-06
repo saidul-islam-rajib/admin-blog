@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AboutApiService } from '../../../core/services/about-api.service';
 import { Interest } from '../../../core/interfaces/interest'
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-interests',
@@ -12,7 +13,8 @@ import { CommonModule } from '@angular/common';
 export class InterestsComponent {
   public interestList: Interest[] = [];
   constructor(
-    private about: AboutApiService
+    private about: AboutApiService,
+    private router: Router
   ){
     this.getInterestList();
   }
@@ -33,5 +35,10 @@ export class InterestsComponent {
     return keys
       .map((s: any, index: number) => `${index + 1}. ${s.key}`)
       .join('<br/>');
+  }
+
+  updateInterest(interest: any){
+    const interestId = interest.interestId;
+    this.router.navigate(['/interest/edit/'+interestId])
   }
 }

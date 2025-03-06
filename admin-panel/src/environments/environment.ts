@@ -10,5 +10,9 @@ export const environment = {
 
   getExperienceDetails: (id: string) => `https://localhost:5050/experience/get-by-id/${id}`,
   experiencePost: (userId: string) => `https://localhost:5050/experience/users/${userId}/create`,
-  updateExperience: (id: string, userId: string) => `https://localhost:5050/experience/update-experience/${id}/user/${userId}`
+  updateExperience: (id: string, userId: string) => `https://localhost:5050/experience/update-experience/${id}/user/${userId}`,
+
+  getInterestDetails: (id: string) => `https://localhost:5050/interest/${id}`,
+  postInterest: (userId: string) => `https://localhost:5050/interest/users/${userId}/create-interest`,
+  updateInterest: (id: string, userId: string) => `https://localhost:5050/interest/update-interest/${id}/user/${userId}`
 };
