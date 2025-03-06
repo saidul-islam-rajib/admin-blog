@@ -6,17 +6,22 @@
       <th scope="col">Journal Name</th>
       <th scope="col">Date</th>
       <th scope="col">Keys</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let publication of publicationList; let i = index">
       <th scope="row">{{ i + 1 }}</th>
-      <td>{{ publication.title }}</td>
+      <td><i>{{ publication.title }}</i></td>
       <td>{{ publication.journalName }}</td>
-      <td>{{ publication.date | date: 'MMM yyyy'}}</td>
-      <td
-      [innerHTML]="getPublicationKeys(publication.keys)"
-      >
+      <td>{{ publication.date | date : "MMM yyyy" }}</td>
+      <td [innerHTML]="getPublicationKeys(publication.keys)"></td>
+      <td>
+        <i
+          class="fa fa-trash"
+          style="font-size: 15px; cursor: pointer"
+          (click)="deletePublication(publication.publicationId)"
+        ></i>
       </td>
     </tr>
   </tbody>
