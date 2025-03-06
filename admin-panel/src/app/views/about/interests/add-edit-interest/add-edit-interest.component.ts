@@ -59,11 +59,10 @@ export class AddEditInterestComponent implements OnInit {
       image: [''],
       keys: this.fb.array([
         this.fb.group({
-          key: ['', Validators.required]
-        })
-      ])
+          key: ['', Validators.required],
+        }),
+      ]),
     });
-    
   }
 
   get keys(): FormArray {
@@ -88,7 +87,7 @@ export class AddEditInterestComponent implements OnInit {
           title: data.title,
           image: data.image || null,
         });
-  
+
         if (data.keys) {
           this.interestForm.setControl(
             'keys',
@@ -101,7 +100,7 @@ export class AddEditInterestComponent implements OnInit {
             )
           );
         }
-  
+
         if (data.image) {
           this.interestImagePreview = `${environment.baseUrl}${data.image}`;
         }
@@ -111,7 +110,6 @@ export class AddEditInterestComponent implements OnInit {
       },
     });
   }
-  
 
   onSubmit(): void {
     if (this.interestForm.invalid) {
@@ -119,7 +117,6 @@ export class AddEditInterestComponent implements OnInit {
       return;
     }
     const formData = this.createFormData();
-    console.log('form data : ', formData);
     if (this.isEditMode) {
       this.http
         .put(
@@ -168,9 +165,9 @@ export class AddEditInterestComponent implements OnInit {
 
   private addInterestImageToFormData(formData: FormData): void {
     const interestImageFile = this.interestForm.get('image')?.value;
-    if (interestImageFile instanceof File) { // Check if the value is a File object
+    if (interestImageFile instanceof File) {
       formData.append('image', interestImageFile, interestImageFile.name);
-    } else if (this.interestImagePreview) { // Use preview URL if no new image is selected
+    } else if (this.interestImagePreview) {
       formData.append('image', this.interestImagePreview as string);
     }
   }

@@ -4,6 +4,7 @@
       <th scope="col">#</th>
       <th scope="col">Title</th>
       <th scope="col">Key</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -13,6 +14,9 @@
       <td
         [innerHTML]="getInterestKeys(interest.keys)"
       ></td>
+      <td>
+        <i class="fa fa-trash" style="font-size:15px; cursor:pointer;" (click)="deleteInterest(interest.interestId)"></i>
+      </td>
     </tr>
   </tbody>
 </table>
