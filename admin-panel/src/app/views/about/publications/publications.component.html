@@ -12,7 +12,7 @@
   <tbody>
     <tr *ngFor="let publication of publicationList; let i = index">
       <th scope="row">{{ i + 1 }}</th>
-      <td><i>{{ publication.title }}</i></td>
+      <td><i (click)="updatePublication(publication)">{{ publication.title }}</i></td>
       <td>{{ publication.journalName }}</td>
       <td>{{ publication.date | date : "MMM yyyy" }}</td>
       <td [innerHTML]="getPublicationKeys(publication.keys)"></td>

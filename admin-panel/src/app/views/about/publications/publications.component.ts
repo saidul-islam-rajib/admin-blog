@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/authentications/auth.service';
 import { NgToastService } from 'ng-angular-popup';
 import { Colors } from '../../notifications/toasters/toasters.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-publications',
@@ -18,7 +19,8 @@ export class PublicationsComponent {
   constructor(
     private about: AboutApiService,
     private auth: AuthService,
-    private toast: NgToastService
+    private toast: NgToastService,
+    private router: Router
   ) {
     this.getPublicationList();
     this.loggedUserId = this.auth.getUserIdFromToken();
@@ -42,6 +44,11 @@ export class PublicationsComponent {
     return keys
       .map((s: any, index: number) => `${index + 1}. ${s.key}`)
       .join('<br/>');
+  }
+
+  updatePublication(publication: any){
+    const publicationId = publication.publicationId;
+    this.router.navigate(['/publication/edit/' + publicationId]);
   }
 
   deletePublication(publicationId: any){
