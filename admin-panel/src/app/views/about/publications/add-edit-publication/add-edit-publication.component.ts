@@ -43,7 +43,16 @@ export class AddEditPublicationComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm();
+
+    this.route.paramMap.subscribe((params) => {
+      this.publicationId = params.get('id');
+      if (this.publicationId) {
+        this.isEditMode = true;
+        this.loadPublicationDetails(this.publicationId);
+      }
+    });
   }
+
   initializeForm(): void {
     this.publicationForm = this.fb.group({
       title: ['', Validators.required],
@@ -75,16 +84,17 @@ export class AddEditPublicationComponent implements OnInit {
       return;
     }
     const formData = this.createFormData();
+    console.log("form data is : ", formData)
     if (this.isEditMode) {
       this.http
         .put(
-          environment.updateInterest(this.publicationId!, this.loggedUserId),
+          environment.updatePublication(this.publicationId!, this.loggedUserId),
           formData
         )
         .subscribe({
           next: () => {
             this.toast.success('Updated successfully');
-            this.router.navigate(['/interest/list']);
+            this.router.navigate(['/publication/list']);
           },
           error: () => {
             this.toast.danger('Failed to update');
@@ -110,26 +120,37 @@ export class AddEditPublicationComponent implements OnInit {
     const formData = new FormData();
     formData.append('title', this.publicationForm.get('title')?.value);
     formData.append('summary', this.publicationForm.get('summary')?.value);
-    formData.append('journalName', this.publicationForm.get('journalName')?.value);
+    formData.append(
+      'journalName',
+      this.publicationForm.get('journalName')?.value
+    );
     formData.append('date', this.publicationForm.get('date')?.value);
-    this.addInterestKeysToFormData(formData);
-    this.addInterestImageToFormData(formData);
+    this.addPublicationKeysToFormData(formData);
+    this.addPublicationImageToFormData(formData);
     return formData;
   }
 
-  private addInterestKeysToFormData(formData: FormData): void {
+  private addPublicationKeysToFormData(formData: FormData): void {
     const keys = this.publicationForm.get('keys')?.value;
     keys.forEach((section: any, index: number) => {
       formData.append(`keys[${index}].key`, section.key);
     });
   }
 
-  private addInterestImageToFormData(formData: FormData): void {
-    const interestImageFile = this.publicationForm.get('publicationImage')?.value;
-    if (interestImageFile instanceof File) {
-      formData.append('publicationImage', interestImageFile, interestImageFile.name);
+  private addPublicationImageToFormData(formData: FormData): void {
+    const publicationImageFile =
+      this.publicationForm.get('publicationImage')?.value;
+    if (publicationImageFile instanceof File) {
+      formData.append(
+        'publicationImage',
+        publicationImageFile,
+        publicationImageFile.name
+      );
     } else if (this.publicationImagePreview) {
-      formData.append('publicationImage', this.publicationImagePreview as string);
+      formData.append(
+        'publicationImage',
+        this.publicationImagePreview as string
+      );
     }
   }
 
@@ -146,6 +167,36 @@ export class AddEditPublicationComponent implements OnInit {
       this.files.push(newFile);
       this.publicationForm.patchValue({ publicationImage: newFile });
     }
+  }
+
+  private loadPublicationDetails(id: string): void {
+    this.http.get<any>(environment.getPublicationDetails(id)).subscribe({
+      next: (data) => {
+        this.publicationForm.patchValue({
+          title: data.title,
+          summary: data.summary,
+          journalName: data.journalName,
+          date: data.date.split('T')[0],
+          publicationImage: data.publicationImage || null,
+        });
+        if (data.keys) {
+          this.publicationForm.setControl(
+            'keys',
+            this.fb.array(
+              data.keys.map((key: any) =>
+                this.fb.group({
+                  key: [key.key, Validators.required],
+                })
+              )
+            )
+          );
+        }
+
+        if (data.publicationImage) {
+          this.publicationImagePreview = `${environment.baseUrl}${data.publicationImage}`;
+        }
+      },
+    });
   }
 
   removeSection(index: number): void {

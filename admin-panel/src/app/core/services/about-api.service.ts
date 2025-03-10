@@ -47,4 +47,7 @@ export class AboutApiService {
   deleteInterest(id: any, userId: any): Observable<any> {
     return this.http.delete(`${this.baseApiUrl}/interest/delete-interest/${id}/user/${userId}`);
   }
+  deletePublication(id: any, userId: any): Observable<any> {
+    return this.http.delete(`${this.baseApiUrl}/Publication/${id}/delete-publication/user/${userId}`);
+  }
 }

@@ -16,7 +16,7 @@ export const environment = {
   postInterest: (userId: string) => `https://localhost:5050/interest/users/${userId}/create-interest`,
   updateInterest: (id: string, userId: string) => `https://localhost:5050/interest/update-interest/${id}/user/${userId}`,
   
-  getPublicationDetails: (id: string) => `https://localhost:5050/interest/${id}`,
+  getPublicationDetails: (id: string) => `https://localhost:5050/Publication/get-by-id/${id}`,
   postPublication: (userId: string) => `https://localhost:5050/publication/users/${userId}/create-publication`,
-  updatePublication: (id: string, userId: string) => `https://localhost:5050/interest/update-interest/${id}/user/${userId}`
+  updatePublication: (id: string, userId: string) => `https://localhost:5050/Publication/update/${id}/user/${userId}`
 };

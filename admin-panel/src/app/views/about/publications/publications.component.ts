@@ -57,7 +57,7 @@ export class PublicationsComponent {
         (x) => x.publicationId !== publicationId
       );
 
-      this.about.deleteInterest(publicationId, this.loggedUserId).subscribe({
+      this.about.deletePublication(publicationId, this.loggedUserId).subscribe({
         next: () => {
           this.toast.success(Colors.success, 'Deleted', 2000);
         },
