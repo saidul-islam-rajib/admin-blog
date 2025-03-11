@@ -25,11 +25,21 @@ export const routes: Routes = [
       {
         path: 'add',
         loadComponent: () =>
-          import('./add-post/add-post.component').then(
-            (m) => m.AddPostComponent
+          import('./add-edit-post/add-edit-post.component').then(
+            (m) => m.AddEditPostComponent
           ),
         data: {
           title: 'Add',
+        },
+      },
+      {
+        path: 'edit/:id',
+        loadComponent: () =>
+          import('./add-edit-post/add-edit-post.component').then(
+            (m) => m.AddEditPostComponent
+          ),
+        data: {
+          title: 'Edit',
         },
       }
     ],
